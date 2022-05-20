@@ -16,11 +16,27 @@ function App() {
   const createPost=(newPost)=>{
 setPosts([...posts,newPost])
   }
+
+  const removePost=(post)=>{
+    setPosts(posts.filter(p=>p.id !== post.id))
+  }
   
   return (
     <div className="App">
       <PostForm create={createPost}/>
-      <PostList posts={posts} title={'List Posts: 1'} />
+      <hr style={{margin:"15px 0"}}/>
+      <div>
+        <select>
+          <option value='valuel'>By name</option>
+          <option value='valuel'>By description</option>
+
+        </select>
+      </div>
+      {posts.length !==0
+      ?<PostList remove={removePost} posts={posts} title={'List Posts: 1'} />
+      :<h1 style={{textAlign:'center'}}>Posts empty</h1>
+      }
+      
     </div>
   );
 }
